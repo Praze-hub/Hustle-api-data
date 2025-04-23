@@ -1,0 +1,26 @@
+version: '3.8'
+
+networks:
+  hustle:
+    external: true
+
+services:
+  postgres_db:
+    image: postgres:latest
+    container_name: hustle_db
+    restart: always
+    environment:
+      - POSTGRES_DB=hustle
+      - POSTGRES_USER = postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5434:5432'
+    volumes:
+      - ./data/postgres_db:/var/lib/postgresql/data
+
+    networks:
+      - hustle
+
+volumes:
+  postgres_db:
+    driver: local
